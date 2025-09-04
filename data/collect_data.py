@@ -39,7 +39,6 @@ class SimpleDataCollector:
         
         # Data collection setup
         self.data_file = f"scenario_{scenario}_people_data.csv"
-        self.run_log = f"scenario_{scenario}_runs.json"
         self.run_id = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.getpid()}"
         
     def log_person(self, person_index, attributes, decision):
@@ -56,25 +55,6 @@ class SimpleDataCollector:
             row = [self.run_id, self.game_id, person_index, decision] + [attributes.get(attr, False) for attr in sorted(attributes.keys())]
             writer.writerow(row)
     
-    def log_run_summary(self, final_stats):
-        """Log summary statistics for the run"""
-        run_data = {
-            'run_id': self.run_id,
-            'game_id': self.game_id,
-            'timestamp': datetime.now().isoformat(),
-            'scenario': self.scenario,
-            'final_stats': final_stats
-        }
-        
-        runs = []
-        if os.path.exists(self.run_log):
-            with open(self.run_log, 'r') as f:
-                runs = json.load(f)
-        
-        runs.append(run_data)
-        
-        with open(self.run_log, 'w') as f:
-            json.dump(runs, f, indent=2)
     
     def start_new_game(self):
         """Start a new game via API"""
@@ -184,7 +164,6 @@ class SimpleDataCollector:
                 'admitted_count': self.admitted_count,
                 'rejected_count': result['rejectedCount']
             }
-            self.log_run_summary(final_stats)
             
             if self.verbose:
                 print("--- GAME COMPLETED ---")
@@ -200,7 +179,6 @@ class SimpleDataCollector:
                 'admitted_count': self.admitted_count,
                 'rejected_count': self.rejected_count
             }
-            self.log_run_summary(final_stats)
             
             if self.verbose:
                 print("--- GAME FAILED ---")
@@ -248,7 +226,7 @@ def run_data_collection(scenario, num_runs=5, delay_between_runs=30):
             time.sleep(delay_between_runs)
     
     print(f"\n=== Data Collection Complete for Scenario {scenario} ===")
-    print(f"Check scenario_{scenario}_people_data.csv and scenario_{scenario}_runs.json for collected data")
+    print(f"Check scenario_{scenario}_people_data.csv for collected data")
 
 def main():
     parser = argparse.ArgumentParser(description='Collect distribution data from Berghain Challenge API')

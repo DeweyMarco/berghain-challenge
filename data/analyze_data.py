@@ -12,6 +12,7 @@ import json
 import argparse
 from itertools import combinations
 import os
+from collections import Counter
 
 def analyze_scenario_1_data(csv_file):
     """
@@ -195,26 +196,202 @@ def analyze_complex_scenario_data(csv_file, scenario):
         'total_samples': len(df)
     }
 
+def predict_person_type_distribution(csv_file, scenario):
+    """
+    Analyze person type distributions and generate predictive capabilities
+    
+    Args:
+        csv_file: Path to the collected data CSV
+        scenario: Scenario number (1, 2, or 3)
+        
+    Returns:
+        Dictionary with person type distributions and prediction functions
+    """
+    if not os.path.exists(csv_file):
+        print(f"Data file {csv_file} not found. Run data collection first.")
+        return None
+        
+    df = pd.read_csv(csv_file)
+    print(f"\n=== SCENARIO {scenario} PERSON TYPE PREDICTION ==")
+    print(f"Loaded {len(df)} records from {csv_file}")
+    
+    # Get attribute columns (excluding metadata)
+    attribute_cols = [col for col in df.columns if col not in ['run_id', 'game_id', 'person_index', 'decision']]
+    
+    # Create person type combinations as tuples
+    person_types = []
+    for _, row in df.iterrows():
+        person_type = tuple(row[attr] for attr in attribute_cols)
+        person_types.append(person_type)
+    
+    # Count frequencies of each person type
+    type_counts = Counter(person_types)
+    total_people = len(person_types)
+    
+    # Calculate probabilities
+    type_probabilities = {}
+    for person_type, count in type_counts.items():
+        type_probabilities[person_type] = count / total_people
+    
+    print(f"\nFound {len(type_counts)} unique person types:")
+    print("Person Type Distribution:")
+    
+    # Sort by frequency for better readability
+    sorted_types = sorted(type_counts.items(), key=lambda x: x[1], reverse=True)
+    
+    for person_type, count in sorted_types:
+        prob = type_probabilities[person_type]
+        
+        # Create readable description
+        attrs_true = []
+        attrs_false = []
+        for i, attr in enumerate(attribute_cols):
+            if person_type[i]:
+                attrs_true.append(attr)
+            else:
+                attrs_false.append(f"¬{attr}")
+        
+        if attrs_true:
+            description = f"({', '.join(attrs_true)})"
+        else:
+            description = f"({', '.join(attrs_false)})"
+            
+        print(f"  {description:40s} | Count: {count:4d} | Prob: {prob:.4f}")
+    
+    # Generate sample persons to demonstrate prediction
+    print(f"\n=== SAMPLE PERSON GENERATION ===")
+    print("Generating 10 sample persons using empirical distribution:")
+    
+    # Convert to lists for numpy choice
+    types_list = list(type_probabilities.keys())
+    probs_list = list(type_probabilities.values())
+    
+    # Generate samples
+    np.random.seed(42)  # For reproducible results
+    sample_indices = np.random.choice(len(types_list), size=10, p=probs_list)
+    
+    for i, idx in enumerate(sample_indices):
+        person_type = types_list[idx]
+        
+        attrs_desc = []
+        for j, attr in enumerate(attribute_cols):
+            if person_type[j]:
+                attrs_desc.append(attr)
+        
+        if attrs_desc:
+            description = ', '.join(attrs_desc)
+        else:
+            description = 'no attributes'
+            
+        print(f"  Person {i+1:2d}: {description}")
+    
+    # Generate code for simulation engine
+    print(f"\n=== SIMULATION CODE GENERATION ===")
+    print(f"Updated generate_person() method for scenario {scenario}:")
+    print('"""')
+    print('def generate_person(self):')
+    print('    """Generate person using empirical distribution"""')
+    print('    import numpy as np')
+    print('    ')
+    print('    # Person type probabilities from data analysis')
+    print('    types_and_probs = [')
+    
+    for person_type, prob in type_probabilities.items():
+        attrs_dict = {attribute_cols[i]: person_type[i] for i in range(len(attribute_cols))}
+        print(f'        ({attrs_dict}, {prob:.6f}),')
+    
+    print('    ]')
+    print('    ')
+    print('    # Sample person type')
+    print('    types = [tp[0] for tp in types_and_probs]')
+    print('    probs = [tp[1] for tp in types_and_probs]')
+    print('    selected_attrs = np.random.choice(len(types), p=probs)')
+    print('    ')
+    print('    return {"attributes": types[selected_attrs]}')
+    print('"""')
+    
+    return {
+        'scenario': scenario,
+        'attribute_columns': attribute_cols,
+        'person_type_counts': dict(type_counts),
+        'person_type_probabilities': type_probabilities,
+        'total_samples': total_people,
+        'unique_types': len(type_counts)
+    }
+
+def generate_predicted_person(type_probabilities, attribute_cols):
+    """
+    Generate a single person using the empirical distribution
+    
+    Args:
+        type_probabilities: Dict mapping person types to probabilities
+        attribute_cols: List of attribute column names
+        
+    Returns:
+        Dict with person attributes
+    """
+    types_list = list(type_probabilities.keys())
+    probs_list = list(type_probabilities.values())
+    
+    # Sample a person type
+    selected_idx = np.random.choice(len(types_list), p=probs_list)
+    selected_type = types_list[selected_idx]
+    
+    # Convert to attribute dictionary
+    attributes = {attribute_cols[i]: selected_type[i] for i in range(len(attribute_cols))}
+    
+    return {'attributes': attributes}
+
 def main():
     parser = argparse.ArgumentParser(description='Analyze collected Berghain Challenge data')
     parser.add_argument('scenario', type=int, choices=[1, 2, 3],
                        help='Scenario to analyze (1, 2, or 3)')
     parser.add_argument('--save-results', action='store_true',
                        help='Save analysis results to JSON file')
+    parser.add_argument('--predict-types', action='store_true',
+                       help='Analyze and predict person type distributions')
     
     args = parser.parse_args()
     
-    csv_file = f"scenario_{args.scenario}_people_data.csv"
+    # Try both relative paths - from data folder and from project root
+    csv_file_local = f"scenario_{args.scenario}_people_data.csv"
+    csv_file_from_root = f"data/scenario_{args.scenario}_people_data.csv"
     
+    if os.path.exists(csv_file_local):
+        csv_file = csv_file_local
+    elif os.path.exists(csv_file_from_root):
+        csv_file = csv_file_from_root
+    else:
+        csv_file = csv_file_local  # Use local path for error message
+    
+    # Run standard analysis
     if args.scenario == 1:
         results = analyze_scenario_1_data(csv_file)
     else:
         results = analyze_complex_scenario_data(csv_file, args.scenario)
     
+    # Run prediction analysis if requested
+    prediction_results = None
+    if args.predict_types:
+        prediction_results = predict_person_type_distribution(csv_file, args.scenario)
+        if results and prediction_results:
+            results['prediction_analysis'] = prediction_results
+    
+    # Save results
     if results and args.save_results:
         output_file = f"scenario_{args.scenario}_analysis.json"
+        # Handle numpy types for JSON serialization
+        def convert_numpy(obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+            return obj
+        
         with open(output_file, 'w') as f:
-            json.dump(results, f, indent=2)
+            json.dump(results, f, indent=2, default=convert_numpy)
         print(f"\nResults saved to {output_file}")
 
 if __name__ == "__main__":

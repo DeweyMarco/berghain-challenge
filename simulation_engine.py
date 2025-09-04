@@ -60,7 +60,25 @@ class PersonGenerator:
                 'creative': 0.06227,
                 'berlin_local': 0.398
             }
-            self.joint_probabilities = None  # Use independent generation for scenario 2
+            # Joint probabilities from observed behavior for scenario 2
+            self.joint_probabilities = {
+                (False, False, True, True): 0.0981,    # P(berlin_local=False, creative=False, techno_lover=True, well_connected=True)
+                (False, False, True, False): 0.4128,   # P(berlin_local=False, creative=False, techno_lover=True, well_connected=False)
+                (True, False, False, True): 0.2525,    # P(berlin_local=True, creative=False, techno_lover=False, well_connected=True)
+                (True, False, True, False): 0.0122,    # P(berlin_local=True, creative=False, techno_lover=True, well_connected=False)
+                (True, True, True, True): 0.0257,      # P(berlin_local=True, creative=True, techno_lover=True, well_connected=True)
+                (True, False, False, False): 0.0486,   # P(berlin_local=True, creative=False, techno_lover=False, well_connected=False)
+                (True, False, True, True): 0.0472,     # P(berlin_local=True, creative=False, techno_lover=True, well_connected=True)
+                (False, False, False, True): 0.0320,   # P(berlin_local=False, creative=False, techno_lover=False, well_connected=True)
+                (False, False, False, False): 0.0343,  # P(berlin_local=False, creative=False, techno_lover=False, well_connected=False)
+                (True, True, True, False): 0.0080,     # P(berlin_local=True, creative=True, techno_lover=True, well_connected=False)
+                (True, True, False, True): 0.0076,     # P(berlin_local=True, creative=True, techno_lover=False, well_connected=True)
+                (False, True, True, True): 0.0111,     # P(berlin_local=False, creative=True, techno_lover=True, well_connected=True)
+                (False, True, False, True): 0.0034,    # P(berlin_local=False, creative=True, techno_lover=False, well_connected=True)
+                (False, True, True, False): 0.0045,    # P(berlin_local=False, creative=True, techno_lover=True, well_connected=False)
+                (True, True, False, False): 0.0012,    # P(berlin_local=True, creative=True, techno_lover=False, well_connected=False)
+                (False, True, False, False): 0.0008    # P(berlin_local=False, creative=True, techno_lover=False, well_connected=False)
+            }
             # Scenario 2 correlations
             self.correlations = {
                 'techno_lover': {
@@ -97,7 +115,73 @@ class PersonGenerator:
                 'vinyl_collector': 0.044539999999999996,
                 'german_speaker': 0.4565000000000001
             }
-            self.joint_probabilities = None  # Use independent generation for scenario 3
+            # Joint probabilities from observed behavior for scenario 3
+            self.joint_probabilities = {
+                (True, True, True, False, True, False): 0.024882,   # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (True, False, True, False, True, False): 0.266712,  # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (False, True, False, False, True, False): 0.156024, # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (True, False, True, False, False, False): 0.150536, # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (False, False, True, False, True, False): 0.044650, # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (False, False, False, False, True, True): 0.001497,  # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, True, False, False, True, False): 0.100461,  # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (True, True, True, False, False, False): 0.018334,  # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (True, False, False, False, True, False): 0.013594, # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (False, False, True, False, False, False): 0.016026, # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (True, True, False, False, False, False): 0.064230, # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (False, True, True, False, True, False): 0.014966,  # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (False, True, False, False, False, False): 0.021701, # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (True, True, True, True, True, False): 0.002681,    # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (False, False, False, False, True, False): 0.007546, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)
+                (False, True, True, False, True, True): 0.002869,   # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, True, False, True, True, False): 0.003367,   # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (True, True, True, True, True, True): 0.004428,     # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (True, False, True, False, True, True): 0.000935,   # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (False, False, False, True, True, False): 0.000561, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (True, True, False, False, True, True): 0.002432,   # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, False, True, False, False, True): 0.000748,  # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (True, True, True, False, True, True): 0.001808,    # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, False, True, True, True, True): 0.002744,    # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (True, False, True, True, False, False): 0.001996,  # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (False, False, False, False, False, False): 0.012285, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (False, True, True, True, False, False): 0.000374,  # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (True, False, False, False, False, False): 0.012222, # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (True, False, False, True, True, True): 0.001497,   # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (False, True, False, True, True, True): 0.002869,   # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (False, True, False, False, True, True): 0.008044,  # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, True, False, True, False, True): 0.000935,   # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, False, False, True, False, True): 0.000437, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, True, True, False, False, False): 0.006174, # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)
+                (True, False, False, True, True, False): 0.001933,  # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (False, False, True, True, False, False): 0.000499, # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (False, True, False, False, False, True): 0.000748, # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, True, True, True, True, False): 0.000998,   # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (True, False, False, True, False, False): 0.001185, # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (True, False, False, True, False, True): 0.000686,  # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, False, True, False, True, True): 0.001434,  # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, False, True, True, True, False): 0.004240,   # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (True, True, False, True, True, True): 0.002494,    # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (False, True, False, True, True, False): 0.001871,  # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (True, True, False, True, False, False): 0.001122,  # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (True, True, False, False, False, True): 0.000249,  # P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, True, True, True, False, True): 0.000249,   # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, True, True, True, True, True): 0.002619,    # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (False, False, False, True, False, False): 0.000249, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (False, False, True, False, False, True): 0.000249, # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, False, True, True, False, True): 0.000561,  # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, True, True, False, False, True): 0.000935,  # P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, False, True, True, True, False): 0.001122,  # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)
+                (False, False, False, True, True, True): 0.000624,  # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (True, True, True, True, False, True): 0.000998,    # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (True, True, True, True, False, False): 0.001372,   # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+                (True, False, True, True, False, True): 0.000748,   # P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (False, False, True, True, True, True): 0.000499,   # P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)
+                (False, True, False, True, False, True): 0.000499,  # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)
+                (True, False, False, False, False, True): 0.000062, # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (True, False, False, False, True, True): 0.000561,  # P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)
+                (True, True, True, False, False, True): 0.000125,   # P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, False, False, False, False, True): 0.000125, # P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)
+                (False, True, False, True, False, False): 0.000374  # P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)
+            }
             # Scenario 3 correlations
             self.correlations = {
                 'underground_veteran': {
@@ -157,20 +241,52 @@ class PersonGenerator:
         # Initialize all constraint attributes as False
         attributes = {attr: False for attr in self.constraints}
         
-        # For scenario 1, use joint probabilities to maintain observed correlations
+        # Use joint probabilities to maintain observed correlations for all scenarios
         if hasattr(self, 'joint_probabilities') and self.joint_probabilities is not None:
             # Generate correlated attributes using joint probabilities
             rand_val = random.random()
             cumulative = 0.0
             
-            for (young_val, well_dressed_val), prob in self.joint_probabilities.items():
-                cumulative += prob
-                if rand_val <= cumulative:
-                    attributes['young'] = young_val
-                    attributes['well_dressed'] = well_dressed_val
-                    break
+            # Determine attribute order based on scenario
+            scenario_1_attrs = {'young', 'well_dressed'}
+            scenario_2_attrs = {'techno_lover', 'well_connected', 'creative', 'berlin_local'}
+            scenario_3_attrs = {'underground_veteran', 'international', 'fashion_forward', 
+                               'queer_friendly', 'vinyl_collector', 'german_speaker'}
+            
+            constraint_attrs = set(self.constraints.keys())
+            
+            if constraint_attrs == scenario_1_attrs:
+                # Scenario 1: (young, well_dressed)
+                for (young_val, well_dressed_val), prob in self.joint_probabilities.items():
+                    cumulative += prob
+                    if rand_val <= cumulative:
+                        attributes['young'] = young_val
+                        attributes['well_dressed'] = well_dressed_val
+                        break
+            elif constraint_attrs == scenario_2_attrs:
+                # Scenario 2: (berlin_local, creative, techno_lover, well_connected)
+                for (berlin_local_val, creative_val, techno_lover_val, well_connected_val), prob in self.joint_probabilities.items():
+                    cumulative += prob
+                    if rand_val <= cumulative:
+                        attributes['berlin_local'] = berlin_local_val
+                        attributes['creative'] = creative_val
+                        attributes['techno_lover'] = techno_lover_val
+                        attributes['well_connected'] = well_connected_val
+                        break
+            elif constraint_attrs == scenario_3_attrs:
+                # Scenario 3: (fashion_forward, german_speaker, international, queer_friendly, underground_veteran, vinyl_collector)
+                for (fashion_forward_val, german_speaker_val, international_val, queer_friendly_val, underground_veteran_val, vinyl_collector_val), prob in self.joint_probabilities.items():
+                    cumulative += prob
+                    if rand_val <= cumulative:
+                        attributes['fashion_forward'] = fashion_forward_val
+                        attributes['german_speaker'] = german_speaker_val
+                        attributes['international'] = international_val
+                        attributes['queer_friendly'] = queer_friendly_val
+                        attributes['underground_veteran'] = underground_veteran_val
+                        attributes['vinyl_collector'] = vinyl_collector_val
+                        break
         else:
-            # For other scenarios, use independent generation
+            # Fallback to independent generation if joint probabilities not available
             attributes.update({
                 attr: random.random() <= freq 
                 for attr, freq in self.attribute_frequencies.items()

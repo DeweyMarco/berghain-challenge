@@ -48,6 +48,44 @@ You're the bouncer at a night club. Your goal is to fill the venue with N=1000 p
 - well_connected ↔ berlin_local: 0.5724067808436452 (moderate positive correlation)
 - creative ↔ berlin_local: 0.14446459505650772 (weak positive correlation)
 
+## 📊 OBSERVED BEHAVIOR
+This is from data collected from the real API to determine real distribution. 
+
+### Joint Probabilities
+- **P(berlin_local=False, creative=False, techno_lover=True, well_connected=True)**: 0.0981
+- **P(berlin_local=False, creative=False, techno_lover=True, well_connected=False)**: 0.4128
+- **P(berlin_local=True, creative=False, techno_lover=False, well_connected=True)**: 0.2525
+- **P(berlin_local=True, creative=False, techno_lover=True, well_connected=False)**: 0.0122
+- **P(berlin_local=True, creative=True, techno_lover=True, well_connected=True)**: 0.0257
+- **P(berlin_local=True, creative=False, techno_lover=False, well_connected=False)**: 0.0486
+- **P(berlin_local=True, creative=False, techno_lover=True, well_connected=True)**: 0.0472
+- **P(berlin_local=False, creative=False, techno_lover=False, well_connected=True)**: 0.0320
+- **P(berlin_local=False, creative=False, techno_lover=False, well_connected=False)**: 0.0343
+- **P(berlin_local=True, creative=True, techno_lover=True, well_connected=False)**: 0.0080
+- **P(berlin_local=True, creative=True, techno_lover=False, well_connected=True)**: 0.0076
+- **P(berlin_local=False, creative=True, techno_lover=True, well_connected=True)**: 0.0111
+- **P(berlin_local=False, creative=True, techno_lover=False, well_connected=True)**: 0.0034
+- **P(berlin_local=False, creative=True, techno_lover=True, well_connected=False)**: 0.0045
+- **P(berlin_local=True, creative=True, techno_lover=False, well_connected=False)**: 0.0012
+- **P(berlin_local=False, creative=True, techno_lover=False, well_connected=False)**: 0.0008
+
+### Marginal Probabilities
+- **P(techno_lover=True)**: 0.6265
+- **P(well_connected=True)**: 0.4700
+- **P(creative=True)**: 0.0623
+- **P(berlin_local=True)**: 0.3980
+
+### Observed Correlation
+- **corr(techno_lover, well_connected)**: -0.4696
+- **corr(techno_lover, creative)**: 0.0946
+- **corr(techno_lover, berlin_local)**: -0.6549
+- **corr(well_connected, creative)**: 0.1420
+- **corr(well_connected, berlin_local)**: 0.5724
+- **corr(creative, berlin_local)**: 0.1445
+
+### Independence Check
+Found 16 unique person types with empirical distribution from real API data.
+
 ## 🔍 EXPECTED CATEGORY BREAKDOWN
 Based on true probabilities, the population distribution is:
 - **All four attributes**: 0.8% (~8 people) - **PLATINUM!**

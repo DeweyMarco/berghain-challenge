@@ -32,18 +32,6 @@ This is from data collected from the real API to determine real distrabution.
 - **P(young=True, well_dressed=False)**: 0.1753
 - **P(young=True, well_dressed=True)**: 0.1396
 
-### Marginal Probabilities
-- **P(young=True)**: 0.3149
-- **P(well_dressed=True)**: 0.3223
-
-### Observed Correlation
-- **corr(young, well_dressed)**: 0.1756
-
-### Independence Check
-- **P(both | independent)**: 0.1015
-- **P(both | observed)**: 0.1396
-- **Ratio**: 1.38
-
 ## 🔍 EXPECTED CATEGORY BREAKDOWN
 Based on true probabilities, the population distribution is:
 - **Both young & well_dressed**: 10.4% (~104 people) - **GOLD!**

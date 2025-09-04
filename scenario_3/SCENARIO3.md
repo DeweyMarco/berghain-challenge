@@ -85,6 +85,103 @@ You're the bouncer at a night club. Your goal is to fill the venue with N=1000 p
 - queer_friendly ↔ german_speaker: 0.04797381132680503 (weak positive correlation)
 - vinyl_collector ↔ german_speaker: 0.09984452286269897 (weak positive correlation)
 
+## 📊 OBSERVED BEHAVIOR
+This is from data collected from the real API to determine real distribution. 
+
+### Joint Probabilities
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.024882
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.266712
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.156024
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.150536
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.044650
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.001497
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.100461
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.018334
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.013594
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.016026
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.064230
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.014966
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.021701
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.002681
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=False)**: 0.007546
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.002869
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.003367
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.004428
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.000935
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.000561
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.002432
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000748
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.001808
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.002744
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.001996
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.012285
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.000374
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.012222
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.001497
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.002869
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.008044
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000935
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000437
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=False)**: 0.006174
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.001933
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.000499
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000748
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.000998
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.001185
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000686
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.001434
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.004240
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.002494
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.001871
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.001122
+- **P(fashion_forward=True, german_speaker=True, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000249
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000249
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.002619
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.000249
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000249
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000561
+- **P(fashion_forward=False, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000935
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=False)**: 0.001122
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.000624
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000998
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.001372
+- **P(fashion_forward=True, german_speaker=False, international=True, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000748
+- **P(fashion_forward=False, german_speaker=False, international=True, queer_friendly=True, underground_veteran=True, vinyl_collector=True)**: 0.000499
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=True)**: 0.000499
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000062
+- **P(fashion_forward=True, german_speaker=False, international=False, queer_friendly=False, underground_veteran=True, vinyl_collector=True)**: 0.000561
+- **P(fashion_forward=True, german_speaker=True, international=True, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000125
+- **P(fashion_forward=False, german_speaker=False, international=False, queer_friendly=False, underground_veteran=False, vinyl_collector=True)**: 0.000125
+- **P(fashion_forward=False, german_speaker=True, international=False, queer_friendly=True, underground_veteran=False, vinyl_collector=False)**: 0.000374
+
+### Marginal Probabilities
+- **P(underground_veteran=True)**: 0.6795
+- **P(international=True)**: 0.5735
+- **P(fashion_forward=True)**: 0.6910
+- **P(queer_friendly=True)**: 0.0461
+- **P(vinyl_collector=True)**: 0.0445
+- **P(german_speaker=True)**: 0.4565
+
+### Observed Correlation
+- **corr(underground_veteran, international)**: -0.0811
+- **corr(underground_veteran, fashion_forward)**: -0.1697
+- **corr(underground_veteran, queer_friendly)**: 0.0372
+- **corr(underground_veteran, vinyl_collector)**: 0.0722
+- **corr(underground_veteran, german_speaker)**: 0.1119
+- **corr(international, fashion_forward)**: 0.3757
+- **corr(international, queer_friendly)**: 0.0037
+- **corr(international, vinyl_collector)**: -0.0308
+- **corr(international, german_speaker)**: -0.7173
+- **corr(fashion_forward, queer_friendly)**: -0.0035
+- **corr(fashion_forward, vinyl_collector)**: -0.1102
+- **corr(fashion_forward, german_speaker)**: -0.3521
+- **corr(queer_friendly, vinyl_collector)**: 0.4799
+- **corr(queer_friendly, german_speaker)**: 0.0480
+- **corr(vinyl_collector, german_speaker)**: 0.0998
+
+### Independence Check
+Found 64 unique person types with empirical distribution from real API data.
+
 ## 🎯 ADVANCED SCORING
 **Advanced Score**: 7.996 vs threshold 0.100 (×1.5 multi-bonus)
 
