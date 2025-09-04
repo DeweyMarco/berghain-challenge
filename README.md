@@ -13,7 +13,7 @@ This project provides a local simulation environment and example bouncer impleme
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/berghain-challenge.git
+    git clone https://github.com/DeweyMarco/berghain-challenge.git
     cd berghain-challenge
     ```
 
