@@ -39,29 +39,29 @@ def analyze_scenario_1_data(csv_file):
     print("\n=== SCENARIO 1 JOINT DISTRIBUTION ===")
     print("Joint Probabilities:")
     for (young, well_dressed), prob in joint_probs.items():
-        print(f"  P(young={young}, well_dressed={well_dressed}) = {prob:.4f}")
+        print(f"  P(young={young}, well_dressed={well_dressed}) = {prob}")
     
     # Calculate marginal probabilities
     young_prob = df['young'].mean()
     well_dressed_prob = df['well_dressed'].mean()
     
     print(f"\nMarginal Probabilities:")
-    print(f"  P(young=True) = {young_prob:.4f}")
-    print(f"  P(well_dressed=True) = {well_dressed_prob:.4f}")
+    print(f"  P(young=True) = {young_prob}")
+    print(f"  P(well_dressed=True) = {well_dressed_prob}")
     
     # Calculate and verify correlation
     correlation = df['young'].corr(df['well_dressed'])
     print(f"\nObserved Correlation:")
-    print(f"  corr(young, well_dressed) = {correlation:.4f}")
+    print(f"  corr(young, well_dressed) = {correlation}")
     
     # Compare with independence assumption
     independent_joint = young_prob * well_dressed_prob
     observed_joint = joint_probs.get((True, True), 0)
     
     print(f"\nIndependence Check:")
-    print(f"  P(both | independent) = {independent_joint:.4f}")
-    print(f"  P(both | observed) = {observed_joint:.4f}")
-    print(f"  Ratio = {observed_joint/independent_joint:.2f}" if independent_joint > 0 else "  Ratio = N/A")
+    print(f"  P(both | independent) = {independent_joint}")
+    print(f"  P(both | observed) = {observed_joint}")
+    print(f"  Ratio = {observed_joint/independent_joint}" if independent_joint > 0 else "  Ratio = N/A")
     
     # Generate code for simulation engine
     print(f"\n=== SIMULATION ENGINE CODE ===")
@@ -72,7 +72,7 @@ def generate_person(self):
     joint_probs = {""")
     
     for (young, well_dressed), prob in joint_probs.items():
-        print(f"        ({young}, {well_dressed}): {prob:.6f},")
+        print(f"        ({young}, {well_dressed}): {prob},")
     
     print("""    }
     
@@ -128,7 +128,7 @@ def analyze_complex_scenario_data(csv_file, scenario):
     for attr in attribute_cols:
         prob = df[attr].mean()
         marginals[attr] = prob
-        print(f"  P({attr}=True) = {prob:.4f}")
+        print(f"  P({attr}=True) = {prob}")
     
     # Calculate pairwise correlations
     print(f"\nPairwise Correlations:")
@@ -141,7 +141,7 @@ def analyze_complex_scenario_data(csv_file, scenario):
             correlations[attr2] = {}
         correlations[attr1][attr2] = corr
         correlations[attr2][attr1] = corr
-        print(f"  corr({attr1}, {attr2}) = {corr:.4f}")
+        print(f"  corr({attr1}, {attr2}) = {corr}")
     
     # Add self-correlations
     for attr in attribute_cols:
@@ -171,22 +171,22 @@ def analyze_complex_scenario_data(csv_file, scenario):
                     'given_false': prob_given_false
                 }
                 
-                print(f"    P({target_attr}=True | {cond_attr}=True) = {prob_given_true:.4f}")
-                print(f"    P({target_attr}=True | {cond_attr}=False) = {prob_given_false:.4f}")
+                print(f"    P({target_attr}=True | {cond_attr}=True) = {prob_given_true}")
+                print(f"    P({target_attr}=True | {cond_attr}=False) = {prob_given_false}")
     
     # Print simulation engine update
     print(f"\n=== SIMULATION ENGINE UPDATES ===")
     print(f"Update scenario {scenario} frequencies and correlations:")
     print("\n# Frequencies:")
     for attr, freq in marginals.items():
-        print(f"'{attr}': {freq:.6f},")
+        print(f"'{attr}': {freq},")
     
     print("\n# Correlations:")
     for attr1 in attribute_cols:
         print(f"'{attr1}': {{")
         for attr2 in attribute_cols:
             corr_val = correlations.get(attr1, {}).get(attr2, 0.0)
-            print(f"    '{attr2}': {corr_val:.6f},")
+            print(f"    '{attr2}': {corr_val},")
         print("},")
     
     return {
@@ -256,7 +256,7 @@ def predict_person_type_distribution(csv_file, scenario):
         else:
             description = f"({', '.join(attrs_false)})"
             
-        print(f"  {description:40s} | Count: {count:4d} | Prob: {prob:.4f}")
+        print(f"  {description:40s} | Count: {count:4d} | Prob: {prob}")
     
     # Generate sample persons to demonstrate prediction
     print(f"\n=== SAMPLE PERSON GENERATION ===")
@@ -298,16 +298,16 @@ def predict_person_type_distribution(csv_file, scenario):
     
     for person_type, prob in type_probabilities.items():
         attrs_dict = {attribute_cols[i]: person_type[i] for i in range(len(attribute_cols))}
-        print(f'        ({attrs_dict}, {prob:.6f}),')
+        print(f'        ({attrs_dict}, {prob}),')
     
     print('    ]')
     print('    ')
     print('    # Sample person type')
     print('    types = [tp[0] for tp in types_and_probs]')
     print('    probs = [tp[1] for tp in types_and_probs]')
-    print('    selected_attrs = np.random.choice(len(types), p=probs)')
+    print('    selected_idx = np.random.choice(len(types), p=probs)')
     print('    ')
-    print('    return {"attributes": types[selected_attrs]}')
+    print('    return {"attributes": types[selected_idx]}')
     print('"""')
     
     return {
